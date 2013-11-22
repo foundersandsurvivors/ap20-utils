@@ -1,0 +1,1 @@
+/srv/basex/bin/dbload-from-xml.sh

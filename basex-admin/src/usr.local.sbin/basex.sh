@@ -1,0 +1,1 @@
+/usr/local/sbin/basex.sh

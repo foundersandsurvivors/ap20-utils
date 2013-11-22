@@ -1,0 +1,1 @@
+/srv/basex/bin/do-all-basex-databases.sh
