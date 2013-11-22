@@ -6,7 +6,7 @@ These BaseX utility script allow multiple instances of basex, with different set
 Suggested setup of BaseX distro inside an admin dir
 ---------------------------------------------------
 
-There is no automated installer; install maually as described below.
+There is no automated installer; install manually as described below.
 
 For example, assuming your standard Basex distro has been setup like this:
 <pre>
