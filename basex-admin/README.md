@@ -3,6 +3,9 @@ ap20-utils/basex
 
 These BaseX utility script allow multiple instances of basex, with different sets of databases, to share a single BaseX installation.
 
+Suggested setup of BaseX distro inside an admin dir
+---------------------------------------------------
+
 There is no automated installer; install maually as described below.
 
 For example, assuming your standard Basex distro has been setup like this:
@@ -21,6 +24,9 @@ We now have for BASEX:
       WEBWORK:     /srv/basex/webwork   # work area for basex restxq/web apps
       BASEXHOME:   /srv/basex/basex (BaseX normal installation)
 </pre>
+
+Enhanced stop/start scripts for multiple instances
+--------------------------------------------------
 
 The additional scripts supplied in this repo (ap20-utils/basex) are:
 
@@ -56,8 +62,13 @@ It works by soft mapping the basename of the /usr/local/sbin script to a file in
 </pre>
 
 
-basex-admin/webwork/schemas
----------------------------
+src/basex-admin/bin
+-------------------
+
+Various scripts to assist with automated database creation.
+
+src/basex-admin/webwork/schemas
+-------------------------------
 
 Contains local copies of xml schemas for TEI and EAC\_CPF. Add others as required. 
 
