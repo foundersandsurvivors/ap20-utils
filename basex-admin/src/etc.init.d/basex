@@ -1,1 +1,50 @@
-/etc/init.d/basex
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          basex
+# Required-Start:    $remote_fs
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: Run basex xml database server
+### END INIT INFO
+
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+do_start() {
+	if [ -x /usr/local/sbin/basex.sh ]; then
+	        [ "$VERBOSE" != no ] && log_begin_msg "Running /usr/local/sbin/basex.sh start"
+                /usr/local/sbin/basex.sh start
+		ES=$?
+		[ "$VERBOSE" != no ] && log_end_msg $ES
+		return $ES
+	fi
+}
+
+# BASEXCLASSNAME="org.basex.BaseXHTTP"
+
+case "$1" in
+    start)
+	do_start
+        ;;
+    restart|reload|force-reload)
+        echo "Error: argument '$1' not supported" >&2
+        exit 3
+        ;;
+    status)
+	    # ps afx|grep $BASEXCLASSNAME | grep -v grep | perl -pe 's/ \-Uadmin .+/ -Uadmin -P********/;'
+        echo "-- tail -2 /srv/basex/basex/nohup.out"
+        tail -2 /srv/basex/basex/nohup.out
+        /usr/local/sbin/basex.sh status
+        ;;
+    stop)
+        /usr/local/sbin/basex.sh stop
+        ;;
+    *)
+        echo "Usage: $0 start|stop|status" >&2
+        exit 3
+        ;;
+esac
