@@ -2,4 +2,4 @@
 # this file is sourced by /usr/local/sbin/basexXXX_start.sh
 # where this file is /srv/basex/.mysettings/basexXXX
 BX_DBPATH="/data/bx/db"
-BX_JVMSIZE="-d64 -Xms1024m -Xmx2048m"
+# BX_JVMSIZE="-d64 -Xms1024m -Xmx2048m"

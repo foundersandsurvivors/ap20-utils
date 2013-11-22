@@ -1,0 +1,91 @@
+# bash functions used in deploy script
+# usage: . /etc/environment (to get directory location of ap20 yggdrasil distro)
+#        . $AP20_DISTRO/bin/bash.functions
+
+# source the distro's .env (a LOCAL file derived from .env.sample)
+
+. /etc/environment
+
+# info
+function envinfo {
+  echo "-- [$1] environment vars:"
+  printenv|grep $1
+  echo "-- [$1] deployment vars:"
+  set|grep ^$1 |sort
+}
+
+# make a symlink (MUST have moved to the right dir first)
+function symlink {
+   LINKNAME=$1
+   FILENAME=$2
+   if ! [ -L $LINKNAME ]; then
+       if [ -f $FILENAME ]; then
+           ln -s $FILENAME $LINKNAME
+           ls -la $LINKNAME
+       else
+           echo "BUG: symlink FILENAME[$FILENAME] does not exist!"
+           exit 4
+       fi
+   fi
+}
+
+
+# make a directory and set ownership/permissions is requested
+function makedir {
+  D=$1
+  OWNER=$2
+  PERMS=$3
+  if ! [ -d $D ]; then
+     echo ""
+     echo -- makedir $D $OWNER $PERMS
+     sudo mkdir $D
+     sudo chown $OWNER $D
+     sudo chmod $PERMS $D
+     ls -la $D
+  fi
+}
+
+# copy a file and set ownership/permissions is requested
+function copy {
+  FROM=$1
+  TO=$2
+  OWNER=$3
+  PERMS=$4
+  DO=$5
+  
+  # if target does not exist, do it unless excluded host
+  # if they are different 
+  echo ""
+  echo -- copy $FROM $TO [$DO]
+  if ! [ -f $FROM ]; then
+     echo "BUG: Does not exist FROM[$FROM]. Please correct repo or this script!"
+     exit 9
+  fi
+  if [ -f $TO ]; then
+     # it exists - reapply permissions
+     sudo chown $OWNER $TO
+     sudo chmod $PERMS $TO
+     DIFF=`sudo diff -C0 $FROM $TO`
+     if [ "$DIFF" == "" ]; then
+         echo "   Exists and is identical - good."
+     else
+         echo "   *****************"
+         echo "   * MANUAL ACTION * Please resolve DIFFERENCES and commit changes to the local repo. Differences:"
+         echo "   *****************"
+         sudo diff -C0 $FROM $TO
+         ls -la $FROM $TO
+     fi
+  else
+       # it doesn't exist
+       if [ "$DO" == "do" ]; then
+          echo "   Creating with $OWNER $PERMS"
+          sudo cp $FROM $TO
+          sudo chown $OWNER $TO
+          sudo chmod $PERMS $TO
+          ls -la $TO
+       else
+       echo "   To be created with $OWNER $PERMS"
+       fi
+  fi
+}
+

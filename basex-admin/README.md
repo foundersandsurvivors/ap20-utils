@@ -3,10 +3,19 @@ ap20-utils/basex
 
 These BaseX utility script allow multiple instances of basex, with different sets of databases, to share a single BaseX installation.
 
+Automated installation
+----------------------
+Using a userid with sudo rights, cd basex-admin/bin and run ./local-deploy.sh and follow its instructions.
+
+When satisfied, run 
+<pre>
+   ./local-deploy.sh do
+</pre>
+
 Suggested setup of BaseX distro inside an admin dir
 ---------------------------------------------------
 
-There is no automated installer; install manually as described below.
+There is automated installer; install manually as described below.
 
 For example, assuming your standard Basex distro has been setup like this:
 <pre>
