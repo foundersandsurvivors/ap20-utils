@@ -26,6 +26,9 @@ else
     sudo touch $XMLLOC/$DB
 fi
 
+FTIDX=''
+if [[ $DB =~ FT$ ]] ; then FTIDX="yes"; fi
+
 # Create .bxs command files in /srv/basex/scripts/replacedb-vjs.bxs
 SCRIPT="/srv/basex/scripts/replacedb-${DB}.bxs"
 echo "drop db $DB"               > $SCRIPT
@@ -35,7 +38,14 @@ echo "set ftindex off"           >> $SCRIPT
 echo "CREATE DB $DB"             >> $SCRIPT
 echo "CREATE DB $DB $INPUTDIR"   >> $SCRIPT
 echo "CREATE INDEX ATTRIBUTE"    >> $SCRIPT
-echo "CREATE INDEX TEXT"         >> $SCRIPT
+if [ "$FTIDX" == "yes" ]; then
+    echo "SET LANGUAGE EN"       >> $SCRIPT
+    echo "SET STEMMING true"     >> $SCRIPT
+    echo "SET CASESENS false"    >> $SCRIPT
+    echo "CREATE INDEX FULLTEXT" >> $SCRIPT
+else
+    echo "CREATE INDEX TEXT"     >> $SCRIPT
+fi
 echo "OPTIMIZE ALL"              >> $SCRIPT
 echo "open $DB"                  >> $SCRIPT
 echo "flush"                     >> $SCRIPT
@@ -45,6 +55,8 @@ echo "info index tag"            >> $SCRIPT
 echo "close"                     >> $SCRIPT
 echo "list $DB"                  >> $SCRIPT
 
+
+
 echo ""
 echo "-- script: $SCRIPT"
 cat $SCRIPT
@@ -52,7 +64,6 @@ cat $SCRIPT
 cd /srv/basex/basex
 echo ""
 echo "-- running bin/basexclient -c $SCRIPT"
-# put your credentials into your /srv/basex/basex/.basex file
-sudo su fas --command "bin/basexclient -c $SCRIPT "
+sudo su fas --command "bin/basexclient -c $SCRIPT -U admin -P admin"
 
 
