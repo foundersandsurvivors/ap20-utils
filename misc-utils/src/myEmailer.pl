@@ -24,9 +24,9 @@ sub myEmailer {
 
         print "\n-- myEmailer:\n";
         if ($domail) {
-            foreach (keys %mail) {
-                print "dbg..[$_] [".$mail{$_}."]\n";
-            }
+            #foreach (keys %mail) {
+            #    print "dbg..[$_] [".$mail{$_}."]\n";
+            #}
             print "Mail $from sent to $sysadmin_email via[$smtp_host] t[$title] ...start\n";
             sendmail (%mail) or die $Mail::Sendmail::error;
             print "Mail ...done\n";
