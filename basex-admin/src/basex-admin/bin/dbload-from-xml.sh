@@ -1,12 +1,20 @@
 #!/bin/bash
 
+# dbload-from-xml.sh: load a basex database from a directory of xml files (dirname=dbname)
+# for "rsync", your .ssh/config should define "xmlfiles-server" as the host serving master copies of /data/bx/xml
+
 DB="$1"
 XMLLOC="/data/bx/xml"
 RSYNC="$2"
 INPUTDIR="$XMLLOC/$DB"
+XMLFILES_RSYNC="xmlfiles-server:/data/bx/xml" # as per your .ssh/config file
+if [[ "$HOSTNAME" == "klaatu" ]]; then
+   # on dev, things are in a different place, as per klaatu's .ssh/config file
+   XMLFILES_RSYNC="xmlfiles-server:/srv/basex/basex" 
+fi
 
 if [ "$DB" == "" ]; then
-   echo "usage: $0 database [rsync] (If rsync specified, xml will be synced from devfas:/srv/basex/basex)"
+   echo "usage: $0 database [rsync] (If rsync specified, xml will be synced from $XMLFILES_RSYNC)"
    exit 1
 fi
 
@@ -21,9 +29,11 @@ if [ "$RSYNC" == "" ]; then
         exit 2
     fi
 else
-    echo "-- running rsync from devfas to $XMLLOC"
-    sudo rsync -vax root@devfas:/srv/basex/basex/$DB $XMLLOC
-    sudo touch $XMLLOC/$DB
+    #echo "-- running rsync --delete from xmlfiles-server to $XMLLOC"
+    #sudo rsync -vax --delete root@devfas:/srv/basex/basex/$DB $XMLLOC
+    echo "-- running rsync --delete from $XMLFILES_RSYNC to $XMLLOC"
+    rsync -vax --delete $XMLFILES_RSYNC/$DB $XMLLOC
+    touch $XMLLOC/$DB
 fi
 
 FTIDX=''
