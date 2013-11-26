@@ -42,7 +42,7 @@ copy ../src/usr.local.sbin/basex.sh /usr/local/sbin/basex.sh root:root 744 "$1"
 for F in ../src/basex-admin/bin/*
 do
    B=`basename $F`
-   copy $F $BASEX_ADMIN/bin/$B $BASEX_DEFAULT_PERMS 664 "$1"
+   copy $F $BASEX_ADMIN/bin/$B $BASEX_DEFAULT_PERMS 775 "$1"
 done
 copy ../src/basex-admin/.mysettings/basex.sample $BASEX_ADMIN/.mysettings/basex.sample $BASEX_DEFAULT_PERMS 664 "$1"
 for F in ../src/basex-admin/webwork/schemas/*
