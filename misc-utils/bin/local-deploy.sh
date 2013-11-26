@@ -34,9 +34,9 @@ makedir $MY_PERLLIB                   root:root                         775
 cd $DIR
 for F in rfindrep.pl validateXML.pl instmodsh tellSysadmin.pl perl-installed-modules-list.sh
 do
-    copy ../src/$F  $MY_USR_BIN $MY_DEFAULT_PERMS 775 "$1"
+    copy ../src/$F  $MY_USR_BIN/$F $MY_DEFAULT_PERMS 775 "$1"
 done
-copy ../src/myEmailer.pl    $MY_PERLLIB $MY_DEFAULT_PERMS 664 "$1"
+copy ../src/myEmailer.pl    $MY_PERLLIB/myEmailer.pl $MY_DEFAULT_PERMS 664 "$1"
 
 echo "# eoj"
 
