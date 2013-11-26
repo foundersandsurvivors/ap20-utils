@@ -19,7 +19,7 @@ Creates (or replaces) a BaseX database named "dbname" from XML files located in 
 
 It will generate a BaseX script named /srv/basex/scripts/replacedb-normpm.bxs containing:
 <pre>
-Example:  ./dbload-from-xml.sh normpm
+Example:  ./dbload-from-xml.sh normpm [rsync]
 
 -- script: /srv/basex/scripts/replacedb-normpm.bxs
 drop db normpm
@@ -46,6 +46,8 @@ The script is the executed like so:
 
 Note the the dbname contains the string "FT", then a free text index will be created instead.
 
+The optional "rsync" option will pull the xml from the server designated as "xmlfiles-server" in your .ssh/config. 
+
 ./do-all-basex-databases.sh info|reindex|export|backup|cleanup
 --------------------------------------------------------------
 
@@ -66,3 +68,14 @@ Looks for a semaphore file in /data/bx/xml named:
 If found this script will run ./dbload-from-xml.sh dbname.
 
 You can cron this script. From a remote host, push xml directories/files over and have cron automatically recreate databases as needed.
+
+./restoredb.sh
+--------------
+
+Restores a basex database from latest backup.
+
+Usage:
+<pre>
+./restoredb.sh dbname
+</pre>
+
