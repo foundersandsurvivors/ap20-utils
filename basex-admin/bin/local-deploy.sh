@@ -44,7 +44,7 @@ do
    B=`basename $F`
    copy $F $BASEX_ADMIN/bin/$B $BASEX_DEFAULT_PERMS 664 "$1"
 done
-copy ../src/basex-admin/.mysettings/basex $BASEX_ADMIN/.mysettings/basex $BASEX_DEFAULT_PERMS 664
+copy ../src/basex-admin/.mysettings/basex.sample $BASEX_ADMIN/.mysettings/basex.sample $BASEX_DEFAULT_PERMS 664
 for F in ../src/basex-admin/webwork/schemas/*
 do
    B=`basename $F`
