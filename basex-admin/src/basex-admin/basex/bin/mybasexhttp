@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Path to this script
-LOG="/srv/basex/basex/nohup.out"
+. /etc/environment
+LOG="$BASEX_DISTRO/nohup.out"
 echo "------------------------------------------- $0 \$#=[$#] \$*[$*] `date`" >> $LOG
 FILE="${BASH_SOURCE[0]}"
 while [ -h "$FILE" ] ; do

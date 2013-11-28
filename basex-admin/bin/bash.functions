@@ -9,9 +9,46 @@
 # info
 function envinfo {
   echo "-- [$1] environment vars:"
-  printenv|grep $1
-  echo "-- [$1] deployment vars:"
+  printenv|grep $1|sort
+  echo "-- [$1] including additional deployment vars:"
   set|grep ^$1 |sort
+}
+
+# check environment vars are set
+default_value () {
+    name=$1
+    new_default=$2
+    eval current_value=\$$name
+    if [ -z "$current_value" ] ; then
+        eval $name="$new_default"
+    fi
+}
+function checkenv {
+  echo "== checkenv [$1] start:"
+  bad=
+  for V in $1
+  do
+      eval current_value=\$$V
+      if [ -z "$current_value" ] ; then
+         bad="Failed checkenv."
+         echo ""
+         echo "#### You need to set a value for environment variable [$V] ####"
+         if [ -f ../src/etc/environment ]; then
+             echo -n "     Suggestion(see ../src/etc/environment): ";grep "export $V" ../src/etc/environment|perl -pe 's/^.+=//g'
+         fi
+      else
+         echo "Ok: envt var[$V]=[$current_value]"
+      fi
+      #default_value "ALREADY_SET" "Need to set environment var [$V]"
+  done
+  if [ "$bad" == "" ]; then
+      echo "== checkenv done. All good. Proceeding."
+  else
+      echo "########################################################################################"
+      echo "#### $bad Please modify your environment as suggested before proceeding ####"
+      echo "########################################################################################"
+      exit 1
+  fi
 }
 
 # make a symlink (MUST have moved to the right dir first)

@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # for deploying repo contents when pulled from code repo
-
 THIS_DISTRO="ap20-utils/basex-admin"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 
+# this will source /etc./environment and defines functions which we use here
 . bash.functions
 
+# source the variables needed for installation/deployment
 if ! [ -f .env ]; then
    echo "ERROR: .env does not exist!"
    echo "Create $DIR/.env by copying/symlinking to $DIR/.env.sample and modify as required."
@@ -22,7 +23,19 @@ fi
 # do not run if the hostname is defined in the array YGGDEP_EXCLUDED_HOSTS (see .env)
 (for e in ${BASEX_EXCLUDED_HOSTS[@]}; do [[ "$e" == $HOSTNAME ]] && exit 0; done) && exit 2 || echo Deploying $THIS_DISTRO on $HOSTNAME
 
-envinfo BASEX
+# check that the runtime environment variables have been set
+if [[ -f ../src/etc/environment ]]; then
+   env_vars=`perl -ne 'print if (s/^export (\S+)=.+\n/\1 /);' ../src/etc/environment`
+   if ! [[ "$env_vars" == "" ]]; then
+       checkenv "$env_vars"
+   fi
+fi
+
+if [[ "$1" == "check" ]]; then
+   envinfo BASEX
+   echo "-- [check] was specified. Not proceeding."
+   exit 0
+fi
 
 # ensure dirs exist
 
@@ -42,7 +55,7 @@ copy ../src/usr.local.sbin/basex.sh /usr/local/sbin/basex.sh root:root 744 "$1"
 for F in ../src/basex-admin/bin/*
 do
    B=`basename $F`
-   copy $F $BASEX_ADMIN/bin/$B $BASEX_DEFAULT_PERMS 775 "$1"
+   if ! [ "$B" == "README.md" ]; then copy $F $BASEX_ADMIN/bin/$B $BASEX_DEFAULT_PERMS 775 "$1"; fi
 done
 copy ../src/basex-admin/.mysettings/basex.sample $BASEX_ADMIN/.mysettings/basex.sample $BASEX_DEFAULT_PERMS 664 "$1"
 for F in ../src/basex-admin/webwork/schemas/*

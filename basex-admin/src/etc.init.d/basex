@@ -8,9 +8,9 @@
 # Short-Description: Run basex xml database server
 ### END INIT INFO
 
-
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 
+. /etc/environment
 . /lib/init/vars.sh
 . /lib/lsb/init-functions
 
@@ -35,9 +35,8 @@ case "$1" in
         exit 3
         ;;
     status)
-	    # ps afx|grep $BASEXCLASSNAME | grep -v grep | perl -pe 's/ \-Uadmin .+/ -Uadmin -P********/;'
-        echo "-- tail -2 /srv/basex/basex/nohup.out"
-        tail -2 /srv/basex/basex/nohup.out
+        echo "-- tail -2 $BASEX_DISTRO/nohup.out"
+        tail -2 $BASEX_DISTRO/nohup.out
         /usr/local/sbin/basex.sh status
         ;;
     stop)

@@ -1,0 +1,7 @@
+# persistent environment variables used in basex-admin 
+export BASEX_USER=fas
+export BASEX_ADMIN=/srv/basex
+export BASEX_DISTRO=/srv/basex/basex
+export BASEX_DATABASE=/data/bx/db
+export BASEX_XML=/data/bx/xml
+export BASEX_REST=http://localhost:8984/rest

@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /srv/basex/basex
+cd $BASEX_DISTRO
 bin/basexclient -c "restore $1"
 exit $?

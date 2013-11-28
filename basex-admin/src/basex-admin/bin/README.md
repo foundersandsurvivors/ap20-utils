@@ -3,11 +3,7 @@ ap20-utils/basex-admin/bin
 
 Utility shell scripts for creating/replacing xml databases from xml files.
 
-WARNING: Location of source XML files is hard coded to /data/bx/xml. Modify as required.
-
-WARNING: BaseX user hard coded to "fas". Modify as required.
-
-(Todo: refactor to make this an envt var or reference to .mysettings/instance).
+WARNING: Location of source XML files and key directories is defined by environment variables. See etc/environment. Modify as required and add the variables defined there as persistent environment variables on your system.
 
 Usage
 -----
@@ -39,14 +35,14 @@ close
 list normpm
 </pre>
 
-The script is the executed like so:
+The script is then executed by `./dbload-from-xml.sh` like so:
 <pre>
 -- running bin/basexclient -c /srv/basex/scripts/replacedb-normpm.bxs
 </pre>
 
-Note the the dbname contains the string "FT", then a free text index will be created instead.
+Note if the dbname contains the string "FT", then a free text index will be created instead of a normal BaseX text index. See http://docs.basex.org/wiki/Indexes for more information on BaseX indexes.
 
-The optional "rsync" option will pull the xml from the server designated as "xmlfiles-server" in your .ssh/config. 
+The optional `rsync` option will pull the xml from the server named as "xmlfiles-server" in your .ssh/config. 
 
 ./do-all-basex-databases.sh info|reindex|export|backup|cleanup
 --------------------------------------------------------------

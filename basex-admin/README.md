@@ -5,12 +5,19 @@ These BaseX utility script allow multiple instances of basex, with different set
 
 Automated installation
 ----------------------
-Using a userid with sudo rights, cd basex-admin/bin and run ./local-deploy.sh and follow its instructions.
+Using a userid with sudo rights, cd basex-admin/bin and run ./local-deploy.sh and follow its instructions. You'll be advised as to what environment variables need to be set for the operational scripts. The variables you define by copying .env.sample to .env are only used in the installation/deployment script.
 
-When satisfied, run 
+When satisfied with your environment settings, run: 
 <pre>
    ./local-deploy.sh do
 </pre>
+
+To check your environment settings, run:
+<pre>
+   ./local-deploy.sh check
+</pre>
+
+You can run `./local-deploy.sh` at any time and it will report any variances. This means you can feel free to ypdate the ap20-utils repository from github at any time without it affecting your operational deployment in any way.
 
 Suggested setup of BaseX distro inside an admin dir
 ---------------------------------------------------
@@ -19,9 +26,9 @@ There is automated installer; install manually as described below.
 
 For example, assuming your standard Basex distro has been setup like this:
 <pre>
-mkdir /srv/base
-cd /srv/base
-mkdir logs bin scripts webwork
+mkdir /srv/basex
+cd /srv/basex
+mkdir logs bin scripts webwork # note: the webwork dir should be writable by the `BASEX_USER`
 wget http://files.basex.org/releases/7.7.2/BaseX772.zip
 unzip BaseX772.zip
 
@@ -33,6 +40,8 @@ We now have for BASEX:
       WEBWORK:     /srv/basex/webwork   # work area for basex restxq/web apps
       BASEXHOME:   /srv/basex/basex (BaseX normal installation)
 </pre>
+
+Note: I prefer to keep basex databases separate from the basex distribution. See the `BASEX_DATABASE` environment variable.
 
 Enhanced stop/start scripts for multiple instances
 --------------------------------------------------
