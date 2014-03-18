@@ -16,7 +16,7 @@ Requirements:
 * perl 
 * Saxon HE or PE XML processor (assembles an all in one xml file)
 
-The script will query the postgresqldatabasename supplied and generate a list of table names. It creates a directory named the same as the database for all output. It uses postgresql's "query_to_xml" command to generate an xml file for each table in the database. Optionally you can modify the script to determine customised sort sequences for each table (the default is no order by clause). Perl is used to convert from generic 'row" elements to generate an element named the same as the table.
+The script will query the postgresqldatabasename supplied and generate a list of table names. It creates a directory named the same as the database for all output (if it already exists, the previous run is retained). The bash script uses postgresql's "query_to_xml" command to generate an xml file for each table in the database. Optionally you can modify the script to determine customised sort sequences for each table (the default is no order by clause). Perl is used to convert from generic 'row" elements to generate an element named the same as the table.
 
 If your database is very large the final step which makes an all in one xml file, and generates an md5 checksum, may be commented out.
 
