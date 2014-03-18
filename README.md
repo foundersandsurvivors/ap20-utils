@@ -16,3 +16,8 @@ Perl scripts for:
 * recursive find/replace
 * validating xml
 * listing cpan installed modules.
+
+postgresql-to-xml
+-----------------
+
+Bash script to convert a postgresql database to xml. 
