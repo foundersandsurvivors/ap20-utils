@@ -1,0 +1,91 @@
+./run.sh diggers
+##============= ./run.sh Exporting diggers xml 2014-03-18_21:57:51
+
+== Generating list of diggers tablenames
+Output format is unaligned.
+Showing only tuples.
+-- converting each table in diggers/tablenames.txt to xml ...
+== See saxon collection at: diggers/diggers_collection.xml :
+
+<collection key="diggers" when="2014-03-18_21:57:51" generated_by="/srv/ap20/ap20-ddi2-utils/postgresql-to-xml/run.sh" id="diggers_collection.xml">
+  <doc href="xml/dead_children.xml"/>
+  <doc href="xml/default_prepositions.xml"/>
+  <doc href="xml/event_citations.xml"/>
+  <doc href="xml/events.xml"/>
+  <doc href="xml/langs.xml"/>
+  <doc href="xml/linkage_roles.xml"/>
+  <doc href="xml/merged.xml"/>
+  <doc href="xml/months.xml"/>
+  <doc href="xml/my_links.xml"/>
+  <doc href="xml/participant_notes.xml"/>
+  <doc href="xml/participants.xml"/>
+  <doc href="xml/persons.xml"/>
+  <doc href="xml/place_level_desc.xml"/>
+  <doc href="xml/places.xml"/>
+  <doc href="xml/private_persons.xml"/>
+  <doc href="xml/recent_places.xml"/>
+  <doc href="xml/relation_citations.xml"/>
+  <doc href="xml/relations.xml"/>
+  <doc href="xml/source_linkage.xml"/>
+  <doc href="xml/source_part_types.xml"/>
+  <doc href="xml/sources.xml"/>
+  <doc href="xml/sureties.xml"/>
+  <doc href="xml/tag_groups.xml"/>
+  <doc href="xml/tag_prepositions.xml"/>
+  <doc href="xml/tag_types.xml"/>
+  <doc href="xml/tags.xml"/>
+  <doc href="xml/templates.xml"/>
+  <doc href="xml/test.xml"/>
+  <doc href="xml/user_settings.xml"/>
+</collection>
+
+== Generating xml for each table :
+
+Output format is unaligned.
+Showing only tuples.
+
+== Remove crud :
+
+total 1920
+drwxrwxr-x 2 ubuntu ubuntu    4096 Mar 18 21:57 .
+drwxrwxr-x 3 ubuntu ubuntu    4096 Mar 18 21:57 ..
+-rw-rw-r-- 1 ubuntu ubuntu     159 Mar 18 21:57 dead_children.xml
+-rw-rw-r-- 1 ubuntu ubuntu     392 Mar 18 21:57 default_prepositions.xml
+-rw-rw-r-- 1 ubuntu ubuntu     163 Mar 18 21:57 event_citations.xml
+-rw-rw-r-- 1 ubuntu ubuntu     145 Mar 18 21:57 events.xml
+-rw-rw-r-- 1 ubuntu ubuntu     235 Mar 18 21:57 langs.xml
+-rw-rw-r-- 1 ubuntu ubuntu     947 Mar 18 21:57 linkage_roles.xml
+-rw-rw-r-- 1 ubuntu ubuntu     145 Mar 18 21:57 merged.xml
+-rw-rw-r-- 1 ubuntu ubuntu    1359 Mar 18 21:57 months.xml
+-rw-rw-r-- 1 ubuntu ubuntu    2402 Mar 18 21:57 my_links.xml
+-rw-rw-r-- 1 ubuntu ubuntu     167 Mar 18 21:57 participant_notes.xml
+-rw-rw-r-- 1 ubuntu ubuntu     157 Mar 18 21:57 participants.xml
+-rw-rw-r-- 1 ubuntu ubuntu     147 Mar 18 21:57 persons.xml
+-rw-rw-r-- 1 ubuntu ubuntu    1058 Mar 18 21:57 place_level_desc.xml
+-rw-rw-r-- 1 ubuntu ubuntu     145 Mar 18 21:57 places.xml
+-rw-rw-r-- 1 ubuntu ubuntu     163 Mar 18 21:57 private_persons.xml
+-rw-rw-r-- 1 ubuntu ubuntu     159 Mar 18 21:57 recent_places.xml
+-rw-rw-r-- 1 ubuntu ubuntu     169 Mar 18 21:57 relation_citations.xml
+-rw-rw-r-- 1 ubuntu ubuntu     151 Mar 18 21:57 relations.xml
+-rw-rw-r-- 1 ubuntu ubuntu     161 Mar 18 21:57 source_linkage.xml
+-rw-rw-r-- 1 ubuntu ubuntu    4605 Mar 18 21:57 source_part_types.xml
+-rw-rw-r-- 1 ubuntu ubuntu 1831012 Mar 18 21:57 sources.xml
+-rw-rw-r-- 1 ubuntu ubuntu     727 Mar 18 21:57 sureties.xml
+-rw-rw-r-- 1 ubuntu ubuntu    1258 Mar 18 21:57 tag_groups.xml
+-rw-rw-r-- 1 ubuntu ubuntu     531 Mar 18 21:57 tag_prepositions.xml
+-rw-rw-r-- 1 ubuntu ubuntu    6410 Mar 18 21:57 tags.xml
+-rw-rw-r-- 1 ubuntu ubuntu     432 Mar 18 21:57 tag_types.xml
+-rw-rw-r-- 1 ubuntu ubuntu     151 Mar 18 21:57 templates.xml
+-rw-rw-r-- 1 ubuntu ubuntu     141 Mar 18 21:57 test.xml
+-rw-rw-r-- 1 ubuntu ubuntu    3707 Mar 18 21:57 user_settings.xml
+
+== make diggers/diggers_database.xml (all in one xml file -- may need large amount of memory)
+
+Cannot find CatalogManager.properties
+-- [0] from saxon making diggers/diggers_database.xml
+-- done: single xml files per table located in in diggers/xml
+-- done: all in one xml file for database [diggers] located in in diggers/diggers_database.xml
+-rw-rw-r-- 1 ubuntu ubuntu 1770198 Mar 18 21:57 diggers/diggers_database.xml
+-- md5sum:
+37bdc8c1f2bd65b7ba0e579183478f31  diggers/diggers_database.xml
+#== ./run.sh normal eoj
