@@ -1,4 +1,4 @@
-sp20-utils/postgresql-to-xml
+ap20-utils/postgresql-to-xml
 ----------------------------
 
 Utility script used to generate a set of xml files from any postgresql relational database
